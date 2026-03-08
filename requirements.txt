@@ -1,0 +1,11 @@
+numpy>=2,<3
+scipy>=1.11,<2
+pandas>=2,<3
+matplotlib>=3.7
+seaborn>=0.12
+scikit-learn>=1.7,<1.8
+imbalanced-learn>=0.14,<0.15
+joblib>=1.4
+sklearn-features==0.0.2
+dvc[s3]==3.63.0
+pathspec==0.12.1

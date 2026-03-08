@@ -1,0 +1,4 @@
+/models
+/data
+.dvc/config.local
+*.pdf
