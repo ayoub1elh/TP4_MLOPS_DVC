@@ -33,9 +33,19 @@ for model_file in os.listdir('models'):
 
 ## --------------------- Data Preparation ---------------------------- ##
 
-## Read the Dataset
+## Read the Dataset (DVC first, fallback to committed seed data for no-S3 CI)
 TRAIN_PATH = os.path.join(os.getcwd(), 'data', 'dataset.csv')
-df = pd.read_csv(TRAIN_PATH)
+if not os.path.exists(TRAIN_PATH):
+    fallback_path = os.path.join(os.getcwd(), 'seed_data', 'dataset.csv')
+    if os.path.exists(fallback_path):
+        os.makedirs(os.path.join(os.getcwd(), 'data'), exist_ok=True)
+        df = pd.read_csv(fallback_path)
+    else:
+        raise FileNotFoundError(
+            f"Missing dataset at {TRAIN_PATH} and fallback at {fallback_path}."
+        )
+else:
+    df = pd.read_csv(TRAIN_PATH)
 
 ## Drop first 3 features
 df.drop(['RowNumber', 'CustomerId', 'Surname'], axis=1, inplace=True)

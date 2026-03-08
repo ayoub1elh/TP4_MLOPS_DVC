@@ -148,6 +148,11 @@ A chaque `push` ou `pull_request`, il fait:
 7. `dvc push`,
 8. publication CML (metrics + confusion matrix).
 
+Note sans AWS:
+1. si `dvc pull` ne recupere pas `data/dataset.csv`, la CI utilise automatiquement `seed_data/dataset.csv` pour permettre l'execution du training.
+2. `dvc push` devient non bloquant tant que le remote AWS n'est pas accessible.
+3. des que AWS est configure, le flux complet S3 reprend normalement.
+
 ## 6. Verification complete (checklist)
 
 1. Local training:
